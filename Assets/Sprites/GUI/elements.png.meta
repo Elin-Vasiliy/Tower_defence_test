@@ -11,6 +11,15 @@ TextureImporter:
   - first:
       213: 869762779325548650
     second: towerThird
+  - first:
+      213: 8500124053427680401
+    second: Money
+  - first:
+      213: 2352100400687543911
+    second: PlayButton
+  - first:
+      213: -489443713393722782
+    second: TowerMoney
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -165,6 +174,69 @@ TextureImporter:
       bones: []
       spriteID: a9b7995eb5c7a4d4392e0ad7d1400d30
       internalID: 869762779325548650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Money
+      rect:
+        serializedVersion: 2
+        x: 2602
+        y: 2117
+        width: 207
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfa07d2d01be7a24392f67741396b96f
+      internalID: 8500124053427680401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayButton
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 1410
+        width: 401
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81d48346c8b328c4eb903b62fff14ac9
+      internalID: 2352100400687543911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerMoney
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 2259
+        width: 77
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aff14e926969b44d90ef8573b3f1ce0
+      internalID: -489443713393722782
       vertices: []
       indices: 
       edges: []

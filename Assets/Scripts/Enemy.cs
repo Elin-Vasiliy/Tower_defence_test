@@ -10,9 +10,12 @@ public class Enemy : MonoBehaviour
     public float navigation;
     [SerializeField]
     int health;
+    [SerializeField]
+    int rewardAmount;
 
     private Transform enemy;
     Collider2D enemyCollider;
+    Animator anim;
     private float navigationTime = 0;
     private int target = 0;
     bool isDead = false;
@@ -29,6 +32,7 @@ public class Enemy : MonoBehaviour
     {
         enemy = GetComponent<Transform>();
         enemyCollider = GetComponent<Collider2D>();
+        anim = GetComponent<Animator>();
         Manager.Instance.RegisterEnemy(this);
     }
 
@@ -76,10 +80,12 @@ public class Enemy : MonoBehaviour
         {
             //hurt
             health -= hitPoints;
+            anim.Play("Hurt");
         }
         else
         {
             //die
+            anim.SetTrigger("didDie");
             Die();
         }
     }
@@ -88,6 +94,5 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         enemyCollider.enabled = false;
-        Manager.Instance.UnregisterEnemy(this);
     }
 }

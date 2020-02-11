@@ -175,3 +175,4 @@ MonoBehaviour:
   - {fileID: 7419374057429738806, guid: be3cd6cffa6db4d44bbc7b239a68807c, type: 3}
   navigation: 0.01
   health: 20
+  rewardAmount: 2

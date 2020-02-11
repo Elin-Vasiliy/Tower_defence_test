@@ -49,7 +49,6 @@ public class TowerControll : MonoBehaviour
                 targetEnemy = null;
             }
         }
-        Debug.Log(Manager.Instance.EnemyList.Count);
     }
 
     public void FixedUpdate()
@@ -107,7 +106,7 @@ public class TowerControll : MonoBehaviour
         return Mathf.Abs(Vector2.Distance(transform.localPosition, thisEnemy.transform.localPosition));
     }
 
-    private List<Enemy> GetEnemiesRange()
+    private List<Enemy> GetEnemiesInRange()
     {
         List<Enemy> enemiesInRange = new List<Enemy>();
 
@@ -127,9 +126,9 @@ public class TowerControll : MonoBehaviour
         Enemy nearestEnemy = null;
         float smallestDistance = float.PositiveInfinity;
 
-        foreach (Enemy enemy in GetEnemiesRange())
+        foreach (Enemy enemy in GetEnemiesInRange())
         {
-            if (Vector2.Distance(transform.localPosition, enemy.transform.localPosition) < attackRadius)
+            if (Vector2.Distance(transform.localPosition, enemy.transform.localPosition) < smallestDistance)
             {
                 smallestDistance = Vector2.Distance(transform.localPosition, enemy.transform.localPosition);
                 nearestEnemy = enemy;
