@@ -64,7 +64,10 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.tag == "Finish")
         {
+            Manager.Instance.RoundEscaped += 1;
+            Manager.Instance.TotalEscaped += 1;
             Manager.Instance.UnregisterEnemy(this);
+            Manager.Instance.IsWaveOver();
         }
         else if (collision.tag == "Projectile")
         {
@@ -80,6 +83,7 @@ public class Enemy : MonoBehaviour
         {
             //hurt
             health -= hitPoints;
+            Manager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Hit);
             anim.Play("Hurt");
         }
         else
@@ -94,5 +98,9 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         enemyCollider.enabled = false;
+        Manager.Instance.TotalKilled += 1;
+        Manager.Instance.AudioSource.PlayOneShot(SoundManager.Instance.Death);
+        Manager.Instance.AddMoney(rewardAmount);
+        Manager.Instance.IsWaveOver();
     }
 }

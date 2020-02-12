@@ -27,9 +27,7 @@ public class Manager : Loader<Manager>
     [SerializeField]
     private GameObject[] enemies;
     [SerializeField]
-    private int maxEnemiesOnScreen;
-    [SerializeField]
-    private int totalEnemies;
+    private int totalEnemies = 5;
     [SerializeField]
     private int enemiesPerSpawn;
 
@@ -40,10 +38,48 @@ public class Manager : Loader<Manager>
     int totalKilled = 0;
     int whichEnemiesToSpawn = 0;
     gameStatus currentState = gameStatus.play;
+    AudioSource audioSource;
+
 
     public List<Enemy> EnemyList = new List<Enemy>();
 
     private const float spawnDelay = 0.5f;
+
+    public int TotalEscaped
+    {
+        get
+        {
+            return totalEscaped;
+        }
+        set
+        {
+            totalEscaped = value;
+        }
+    }
+
+    public int RoundEscaped
+    {
+        get
+        {
+            return roundEscaped;
+        }
+        set
+        {
+            roundEscaped = value;
+        }
+    }
+
+    public int TotalKilled
+    {
+        get
+        {
+            return totalKilled;
+        }
+        set
+        {
+            totalKilled = value;
+        }
+    }
 
     public int TotalMoney
     {
@@ -57,10 +93,19 @@ public class Manager : Loader<Manager>
             totalMoneyLabel.text = TotalMoney.ToString();
         }
     }
+
+    public AudioSource AudioSource
+    {
+        get
+        {
+            return audioSource;
+        }
+    }
     
     void Start()
     {
         playBtn.gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
         ShowMenu();
     }
 
@@ -75,7 +120,7 @@ public class Manager : Loader<Manager>
         {
             for (int i = 0; i < enemiesPerSpawn; i++)
             {
-                if (EnemyList.Count < maxEnemiesOnScreen)
+                if (EnemyList.Count < totalEnemies)
                 {
                     GameObject newEnemy = Instantiate(enemies[0]) as GameObject;
                     newEnemy.transform.position = spawnPoint.transform.position;
@@ -117,12 +162,71 @@ public class Manager : Loader<Manager>
         TotalMoney -= amount;
     }
 
+    public void IsWaveOver()
+    {
+        totalEscapedLabel.text = "Escaped " + TotalEscaped + "/ 10";
+        if ((RoundEscaped + TotalKilled) == totalEnemies) 
+        {
+            SetCurrentGameState();
+            ShowMenu();
+        }
+    }
+
+    public void SetCurrentGameState()
+    {
+        if (totalEscaped >= 10)
+        {
+            currentState = gameStatus.gameover;
+        }
+        else if (waveNumber == 0 && (RoundEscaped + TotalKilled) == 0)
+        {
+            currentState = gameStatus.play;
+        }
+        else if (waveNumber >= totalWaves)
+        {
+            currentState = gameStatus.win;
+        }
+        else
+        {
+            currentState = gameStatus.next;
+        }
+    }
+
+    public void PlayButtonPressed()
+    {
+        switch (currentState)
+        {
+            case gameStatus.next:
+                waveNumber += 1;
+                totalEnemies += waveNumber;
+                break;
+
+            default:
+                totalEnemies = 5;
+                TotalEscaped = 0;
+                TotalMoney = 10;
+                TowerManager.Instance.DestroyAllTowers();
+                TowerManager.Instance.RenameTagBuildSite();
+                totalMoneyLabel.text = totalMoney.ToString();
+                totalEscapedLabel.text = "Escaped " + TotalEscaped + "/ 10";
+                audioSource.PlayOneShot(SoundManager.Instance.NewGame);
+                break;
+        }
+        DestroyEnemies();
+        TotalKilled = 0;
+        RoundEscaped = 0;
+        currentWave.text = "Wave " + (waveNumber + 1);
+        StartCoroutine(Spawn());
+        playBtn.gameObject.SetActive(false);
+    }
+
     public void ShowMenu()
     {
         switch (currentState)
         {
             case gameStatus.gameover:
                 playBtnLabel.text = "Play again!";
+                AudioSource.PlayOneShot(SoundManager.Instance.GameOver);
                 break;
             case gameStatus.next:
                 playBtnLabel.text = "Next wave";

@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f385efb70ced1d46932c505b790e820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerObject: {fileID: 230551304427660342, guid: 8015f44e91eb5e643a8af898dcabadb1,
+  towerObject: {fileID: -8783003991261112606, guid: 8015f44e91eb5e643a8af898dcabadb1,
     type: 3}
   dragSprite: {fileID: 21300000, guid: 9a2ceababe20d2c41ad1e40e2c5047c7, type: 3}
   towerPrice: 15

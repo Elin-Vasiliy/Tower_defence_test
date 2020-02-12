@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerBtn.cs" />
     <Compile Include="Assets\Scripts\TowerControll.cs" />
     <Compile Include="Assets\Scripts\TowerManager.cs" />

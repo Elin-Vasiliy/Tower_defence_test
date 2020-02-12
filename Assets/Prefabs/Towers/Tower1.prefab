@@ -94,6 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenAttacks: 1
-  attackRadius: 2
+  attackRadius: 10
   projectile: {fileID: 6110362120797949686, guid: cc83c02aa6ef24f4bae81ccc99197007,
     type: 3}
